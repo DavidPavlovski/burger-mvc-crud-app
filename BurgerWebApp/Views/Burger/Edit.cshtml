@@ -1,0 +1,19 @@
+﻿@model BurgerViewModel
+
+<h1>Edit @Model.Name</h1>
+<form asp-action="Edit" asp-controller="Burger" method="post">
+    <input type="hidden" value="@Model.Id" asp-for="@Model.Id"/>
+    <div class="form-group">
+        <label asp-for="@Model.Name"></label>
+        <input asp-for="@Model.Name" type="text" class="form-control" value="@Model.Name">
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Ingredients"></label>
+        <input asp-for="@Model.Ingredients" type="text" class="form-control" value="@Model.Ingredients" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.ImageUrl"></label>
+        <input asp-for="@Model.ImageUrl" type="text" class="form-control" value="@Model.ImageUrl" />
+    </div>
+    <button type="submit" class="btn btn-primary form-group mt-3">Save</button>
+</form>

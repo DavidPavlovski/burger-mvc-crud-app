@@ -1,0 +1,87 @@
+﻿@model OrderDetailsViewModel
+<h1>Details for order-id : #@Model.Id</h1>
+
+<h2 class="text-center mt-4">Customer Details</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Custommer Name</th>
+            <th scope="col">Custommer Handle Address</th>
+            <th scope="col">Total Order price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.FirstName</td>
+            <td>@Model.LastName</td>
+            <td>@Model.TotalPrice</td>
+        </tr>
+    </tbody>
+</table>
+<hr />
+
+<h2 class="text-center">Ordered Burgers</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Quantity </th>
+            <th scope="col">Price</th>
+            <th scope="col">Total Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var item in Model.Burgers)
+            {
+                <tr>
+                    <td>@item.Burger.Name</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Burger.Price</td>
+                    <td>@item.Quantity * @item.Burger.Price = @(item.Quantity * item.Burger.Price)</td>
+                </tr>
+            }
+        }
+
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>Total Price For all items:</th>
+            <th></th>
+            <th></th>
+            <th>@(Model.Burgers.Sum( x => x.Burger.Price*x.Quantity))</th>
+        </tr>
+    </tfoot>
+</table>
+<h2 class="text-center">Ordered Extras</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Quantity </th>
+            <th scope="col">Price </th>
+            <th scope="col">Total Price </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var item in Model.Extras)
+            {
+                <tr>
+                    <td>@item.Extra.Name</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Extra.Price</td>
+                    <td>@item.Quantity * @item.Extra.Price = @(item.Quantity * item.Extra.Price)</td>
+                </tr>
+            }
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>Total Price for all items</th>
+            <th></th>
+            <th></th>
+            <th>@(Model.Extras.Sum( x => x.Extra.Price * x.Quantity))</th>
+        </tr>
+    </tfoot>
+</table>

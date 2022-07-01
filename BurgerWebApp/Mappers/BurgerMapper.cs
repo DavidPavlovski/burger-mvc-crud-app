@@ -12,7 +12,10 @@ namespace BurgerWebApp.Mappers
                 Id = burger.Id,
                 Name = burger.Name,
                 Ingredients = burger.Ingredients,
-                ImageUrl = burger.ImageUrl
+                ImageUrl = burger.ImageUrl,
+                IsVegan = burger.IsVegan,
+                IsVegetarian = burger.IsVegetarian,
+                Price = burger.Price
             };
         }
 

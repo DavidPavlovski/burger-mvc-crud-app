@@ -1,7 +1,9 @@
-﻿@model List<BurgerViewModel>
+﻿@using System.Globalization;
+@model List<BurgerViewModel>
 
 <h1 class="text-center my-4">Burger at Dacho's</h1>
-<div class="row d-flex justify-content-evenly g-4">
+    <a class="btn btn-primary mb-4 w-25 mx-" asp-area="" asp-controller="Burger" asp-action="Create">Create</a>
+<div class="row d-flex justify-content-evenly g-4 ">
     @{
         foreach (var burger in Model)
         {
@@ -10,6 +12,19 @@
                 <div class="card-body">
                     <h5 class="card-title">@burger.Name</h5>
                     <p class="card-text">@burger.Ingredients</p>
+                    @{
+                        if (burger.IsVegan)
+                        {
+                            <p class="card-text">Vegan</p>
+                        }
+                    }
+                    @{
+                        if (burger.IsVegetarian)
+                        {
+                            <p class="card-text">Vegetarian</p>
+                        }
+                    }
+                    <p class="card-text">@burger.Price.ToString("C" , CultureInfo.CreateSpecificCulture("mk-MK"))</p>
                     <div class="d-flex align-center justify-content-around">
                         <a asp-action="Details" asp-controller="Burger" asp-route-id="@burger.Id" class="btn btn-primary">Read more</a>
                         <a asp-action="Edit" asp-controller="Burger" asp-route-id="@burger.Id" class="btn btn-warning">Edit</a>

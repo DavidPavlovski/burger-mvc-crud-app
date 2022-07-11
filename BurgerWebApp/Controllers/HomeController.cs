@@ -1,4 +1,4 @@
-﻿using BurgerWebApp.Models;
+﻿using BurgerWebApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

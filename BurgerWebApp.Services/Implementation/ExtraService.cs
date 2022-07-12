@@ -24,7 +24,7 @@ namespace BurgerWebApp.Services.Implementation
         {
             return _extraRepository.GetAll().Select(x => x.ToViewModel()).ToList();
         }
-        public ExtraViewModel GetById(Guid id)
+        public ExtraViewModel GetById(int id)
         {
             Extra model = _extraRepository.GetById(id);
             if (model == null)
@@ -63,7 +63,7 @@ namespace BurgerWebApp.Services.Implementation
             extra.Update(model);
             _extraRepository.Update(extra);
         }
-        public void Delete(Guid id)
+        public void Delete(int id)
         {
             Extra extraToDelete = _extraRepository.GetById(id);
             if (extraToDelete == null)

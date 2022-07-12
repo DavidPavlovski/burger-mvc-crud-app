@@ -2,17 +2,18 @@
 {
     public class BurgerOrderItem
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
+        public int BurgerId { get; set; }
         public Burger Burger { get; set; }
+        public int OrderId { get; set; }
         public Order Order { get; set; }
         public int Quantity { get; set; }
         public decimal Price { get; set; }
         public BurgerOrderItem() { }
-        public BurgerOrderItem(Burger burger, Order order, int quantity, decimal price)
+        public BurgerOrderItem(int burgerId, int orderId, int quantity, decimal price)
         {
-            Id = Guid.NewGuid();
-            Burger = burger;
-            Order = order;
+            BurgerId = burgerId;
+            OrderId = orderId;
             Quantity = quantity;
             Price = price;
         }

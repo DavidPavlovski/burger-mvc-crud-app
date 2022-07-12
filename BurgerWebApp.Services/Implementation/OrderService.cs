@@ -1,38 +1,29 @@
 ﻿using BurgerWebApp.DataAccess.Abstraction;
-using BurgerWebApp.DataAccess.Storage;
 using BurgerWebApp.Domain;
 using BurgerWebApp.Mappers;
 using BurgerWebApp.Services.Abstraction;
 using BurgerWebApp.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BurgerWebApp.Services.Implementation
 {
     public class OrderService : IOrderService
     {
         private readonly IRepository<Order> _orderRepository;
-        private readonly IRepository<Burger> _burgerRepository;
-        private readonly IRepository<Extra> _extraRepository;
 
-        public OrderService(IRepository<Order> orderRepository, IRepository<Burger> burgerRepository, IRepository<Extra> extraRepository)
+
+        public OrderService(IRepository<Order> orderRepository)
         {
             _orderRepository = orderRepository;
-            _burgerRepository = burgerRepository;
-            _extraRepository = extraRepository;
+            
         }
 
         public List<OrderViewModel> GetAll()
         {
-
             var items = _orderRepository.GetAll();
             return _orderRepository.GetAll().Select(x => x.ToViewModel()).ToList();
         }
 
-        public OrderViewModel GetById(Guid id)
+        public OrderViewModel GetById(int id)
         {
             Order model = _orderRepository.GetById(id);
             if (model == null)
@@ -56,7 +47,6 @@ namespace BurgerWebApp.Services.Implementation
             }
             Order newOrder = new Order
             {
-                Id = Guid.NewGuid(),
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Address = model.Address,
@@ -66,23 +56,26 @@ namespace BurgerWebApp.Services.Implementation
             List<ExtraOrderItem> extras = new List<ExtraOrderItem>();
             foreach (var item in selectedBurgers)
             {
-                Burger selectedBurger = _burgerRepository.GetById(item.Burger.Id);
-                burgers.Add(new BurgerOrderItem(selectedBurger,newOrder, item.Quantity , item.Price));
+                burgers.Add(new BurgerOrderItem(item.Burger.Id,newOrder.Id, item.Quantity , item.Price));
             }
             foreach (var item in selectedExtras)
             {
-                Extra selectedExtra = _extraRepository.GetById(item.Extra.Id);
-                extras.Add(new ExtraOrderItem(selectedExtra, newOrder, item.Quantity , item.Price));
+                extras.Add(new ExtraOrderItem(item.Extra.Id, newOrder.Id, item.Quantity , item.Price));
             }
             newOrder.Burgers = burgers;
             newOrder.Extras = extras;
-            newOrder.TotalPrice = newOrder.Burgers.Sum(x => x.Burger.Price * x.Quantity) + newOrder.Extras.Sum(x => x.Extra.Price * x.Quantity);
+            newOrder.TotalPrice = burgers.Sum(x => x.Price * x.Quantity) + extras.Sum(x => x.Price * x.Quantity);
             _orderRepository.Insert(newOrder);
         }
 
-        public void Delete(Guid id)
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var item = _orderRepository.GetById(id);
+            if(item == null)
+            {
+                throw new Exception($"Order with Id:{id} does not exist");
+            }
+            _orderRepository.DeleteById(id);
         }
 
         public void Edit(OrderViewModel model)

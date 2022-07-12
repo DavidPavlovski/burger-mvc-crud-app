@@ -1,43 +1,48 @@
 ﻿using BurgerWebApp.DataAccess.Abstraction;
-using BurgerWebApp.DataAccess.Storage;
 using BurgerWebApp.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace BurgerWebApp.DataAccess.Repositories
 {
     public class OrderRepository : IRepository<Order>
     {
+
+        private readonly BurgerWebAppDbContext _dbContext;
+
+        public OrderRepository(BurgerWebAppDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         public List<Order> GetAll()
         {
-            return BurgerDb.Orders;
+            return _dbContext.Orders.Include(x=> x.Burgers).ThenInclude(y => y.Burger).Include(x => x.Extras).ThenInclude(y=> y.Extra).ToList();
         }
-        public Order GetById(Guid id)
+        public Order GetById(int id)
         {
-            return BurgerDb.Orders.FirstOrDefault(x => x.Id == id);
+            return _dbContext.Orders.Include(x => x.Burgers).ThenInclude(y => y.Burger).Include(x => x.Extras).ThenInclude(y => y.Extra).FirstOrDefault(x => x.Id == id);
         }
         public void Insert(Order entity)
         {
-            BurgerDb.Orders.Add(entity);
+            _dbContext.Orders.Add(entity);
+            _dbContext.SaveChanges();
         }
         public void Update(Order entity)
         {
             var item = GetById(entity.Id);
             if(item != null)
             {
-                int index = BurgerDb.Orders.IndexOf(item);
-                BurgerDb.Orders[index] = entity;
+                _dbContext.Update(entity);
+                _dbContext.SaveChanges();
             }
         }
-        public void DeleteById(Guid id)
+        public void DeleteById(int id)
         {
             var item = GetById(id);
             if (item != null)
             {
-                BurgerDb.Orders.Remove(item);
+                _dbContext.Orders.Remove(item);
+                _dbContext.SaveChanges();
             }
         }
     }

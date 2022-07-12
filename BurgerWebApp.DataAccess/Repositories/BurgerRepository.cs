@@ -1,30 +1,33 @@
 ﻿using BurgerWebApp.DataAccess.Abstraction;
-using BurgerWebApp.DataAccess.Storage;
 using BurgerWebApp.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BurgerWebApp.DataAccess.Repositories
 {
     public class BurgerRepository : IRepository<Burger>
     {
-        public List<Burger> GetAll()
+
+        private readonly BurgerWebAppDbContext _dbContext;
+
+        public BurgerRepository(BurgerWebAppDbContext dbContext)
         {
-            return BurgerDb.Burgers;
+            _dbContext = dbContext;
         }
 
-        public Burger GetById(Guid id)
+        public List<Burger> GetAll()
         {
-            return BurgerDb.Burgers.FirstOrDefault(x => x.Id == id);
+            return _dbContext.Burgers.ToList();
+        }
+
+        public Burger GetById(int id)
+        {
+            return _dbContext.Burgers.FirstOrDefault(x => x.Id == id);
         }
 
         public void Insert(Burger entity)
         {
 
-            BurgerDb.Burgers.Add(entity);
+            _dbContext.Burgers.Add(entity);
+            _dbContext.SaveChanges();
         }
 
         public void Update(Burger entity)
@@ -32,17 +35,18 @@ namespace BurgerWebApp.DataAccess.Repositories
             var item = GetById(entity.Id);
             if (item != null)
             {
-                int index = BurgerDb.Burgers.IndexOf(item);
-                BurgerDb.Burgers[index] = entity;
+                _dbContext.Burgers.Update(entity);
+                _dbContext.SaveChanges();
             }
         }
 
-        public void DeleteById(Guid id)
+        public void DeleteById(int id)
         {
             var item = GetById(id);
             if (item != null)
             {
-                BurgerDb.Burgers.Remove(item);
+                _dbContext.Burgers.Remove(item);
+                _dbContext.SaveChanges();
             }
         }
     }

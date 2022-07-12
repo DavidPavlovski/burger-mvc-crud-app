@@ -25,7 +25,7 @@ namespace BurgerWebApp.Services.Implementation
             return _burgerRepository.GetAll().Select(x => x.ToViewModel()).ToList();
 
         }
-        public BurgerViewModel GetById(Guid id)
+        public BurgerViewModel GetById(int id)
         {
             var item = _burgerRepository.GetById(id);
             if (item == null)
@@ -35,7 +35,7 @@ namespace BurgerWebApp.Services.Implementation
             return item.ToViewModel();
         }
 
-        public Guid Create(BurgerViewModel model)
+        public int Create(BurgerViewModel model)
         {
             if (string.IsNullOrEmpty(model.Name) || string.IsNullOrEmpty(model.Ingredients) || string.IsNullOrEmpty(model.ImageUrl) || model.Price <= 0)
             {
@@ -50,7 +50,7 @@ namespace BurgerWebApp.Services.Implementation
             return newBurger.Id;
         }
 
-        public void Delete(Guid id)
+        public void Delete(int id)
         {
             Burger burgerToDelete = _burgerRepository.GetAll().FirstOrDefault(x => x.Id == id);
             if (burgerToDelete == null)

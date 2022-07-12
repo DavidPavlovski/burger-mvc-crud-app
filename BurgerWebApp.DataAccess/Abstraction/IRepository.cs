@@ -9,9 +9,9 @@ namespace BurgerWebApp.DataAccess.Abstraction
     public interface IRepository<T>
     {
         List<T> GetAll();
-        T GetById(Guid id);
+        T GetById(int id);
         void Insert (T entity);
         void Update (T entity);
-        void DeleteById (Guid id);
+        void DeleteById (int id);
     }
 }

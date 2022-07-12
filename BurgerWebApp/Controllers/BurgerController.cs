@@ -20,13 +20,13 @@ namespace BurgerWebApp.Controllers
             return View(burgers);
         }
 
-        public IActionResult Details(Guid id)
+        public IActionResult Details(int id)
         {
             BurgerViewModel burger = _burgerSercvice.GetById(id);
             return View(burger);
         }
 
-        public IActionResult Edit(Guid id)
+        public IActionResult Edit(int id)
         {
             BurgerViewModel burger = _burgerSercvice.GetById(id);
             return View(burger);
@@ -47,11 +47,11 @@ namespace BurgerWebApp.Controllers
         [HttpPost]
         public IActionResult Create(BurgerViewModel model)
         {
-            Guid id = _burgerSercvice.Create(model);
+            int id = _burgerSercvice.Create(model);
             return RedirectToAction("Details", "Burger", new { id = id });
         }
 
-        public IActionResult Delete(Guid id)
+        public IActionResult Delete(int id)
         {
            _burgerSercvice.Delete(id);
             return RedirectToAction("Index");

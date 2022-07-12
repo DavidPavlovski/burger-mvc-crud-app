@@ -2,17 +2,18 @@
 {
     public class ExtraOrderItem
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
+        public int ExtraId { get; set; }
         public Extra Extra { get; set; }
+        public int OrderId { get; set; }
         public Order Order { get; set; }
         public int Quantity { get; set; }
         public decimal Price { get; set; }
         public ExtraOrderItem() { }
-        public ExtraOrderItem(Extra extra,Order order, int quantity, decimal price)
+        public ExtraOrderItem(int extraId,int orderId, int quantity, decimal price)
         {
-            Id = Guid.NewGuid();
-            Extra = extra;
-            Order = order;
+            ExtraId = extraId;
+            OrderId = orderId;
             Quantity = quantity;
             Price = price;
         }

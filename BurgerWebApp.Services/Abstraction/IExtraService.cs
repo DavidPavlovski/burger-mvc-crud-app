@@ -10,9 +10,9 @@ namespace BurgerWebApp.Services.Abstraction
     public interface IExtraService
     {
         List<ExtraViewModel> GetAll();
-        ExtraViewModel GetById(Guid id);
+        ExtraViewModel GetById(int id);
         void Create(ExtraViewModel model);
         void Edit(ExtraViewModel model);
-        void Delete(Guid id);
+        void Delete(int id);
     }
 }

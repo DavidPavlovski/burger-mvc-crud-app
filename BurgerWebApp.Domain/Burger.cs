@@ -4,7 +4,7 @@ namespace BurgerWebApp.Domain
 {
     public class Burger
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Ingredients { get; set; }
         public string ImageUrl { get; set; }
@@ -14,7 +14,6 @@ namespace BurgerWebApp.Domain
         public Burger() { }
         public Burger(string name, string ingredients, string imageUrl, bool isVegan, bool isVegetarian, decimal price)
         {
-            Id = Guid.NewGuid();
             Name = name;
             Ingredients = ingredients;
             ImageUrl = imageUrl;

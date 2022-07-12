@@ -32,7 +32,7 @@ namespace BurgerWebApp.Controllers
             return RedirectToAction("index");
         }
 
-        public IActionResult Edit(Guid id)
+        public IActionResult Edit(int id)
         {
             ExtraViewModel model = _extraService.GetById(id);
             return View(model);
@@ -45,7 +45,7 @@ namespace BurgerWebApp.Controllers
             return RedirectToAction("index");
         }
 
-        public IActionResult Delete(Guid id)
+        public IActionResult Delete(int id)
         {
             _extraService.Delete(id);
             return RedirectToAction("index");

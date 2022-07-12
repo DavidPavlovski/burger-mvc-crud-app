@@ -1,8 +1,10 @@
+using BurgerWebApp.DataAccess;
 using BurgerWebApp.DataAccess.Abstraction;
 using BurgerWebApp.DataAccess.Repositories;
 using BurgerWebApp.Domain;
 using BurgerWebApp.Services.Abstraction;
 using BurgerWebApp.Services.Implementation;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,8 +20,11 @@ builder.Services.AddTransient<IRepository<Burger>, BurgerRepository>();
 builder.Services.AddTransient<IRepository<Extra>, ExtraRepository>();
 builder.Services.AddTransient<IRepository<Order>, OrderRepository>();
 
-var app = builder.Build();
+builder.Services.AddDbContext<BurgerWebAppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+);
 
+var app = builder.Build();
 
 
 // Configure the HTTP request pipeline.

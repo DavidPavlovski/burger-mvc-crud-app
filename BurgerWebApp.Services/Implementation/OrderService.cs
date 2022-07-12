@@ -67,12 +67,12 @@ namespace BurgerWebApp.Services.Implementation
             foreach (var item in selectedBurgers)
             {
                 Burger selectedBurger = _burgerRepository.GetById(item.Burger.Id);
-                burgers.Add(new BurgerOrderItem(selectedBurger,newOrder, item.Quantity));
+                burgers.Add(new BurgerOrderItem(selectedBurger,newOrder, item.Quantity , item.Price));
             }
             foreach (var item in selectedExtras)
             {
                 Extra selectedExtra = _extraRepository.GetById(item.Extra.Id);
-                extras.Add(new ExtraOrderItem(selectedExtra, newOrder, item.Quantity));
+                extras.Add(new ExtraOrderItem(selectedExtra, newOrder, item.Quantity , item.Price));
             }
             newOrder.Burgers = burgers;
             newOrder.Extras = extras;

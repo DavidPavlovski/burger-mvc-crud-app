@@ -20,6 +20,7 @@
         {
             <div class="form-group d-flex gap-5 align-items-center border border-secondary mb-2 px-5 py-2">
                 <input type="hidden" asp-for="@Model.Burgers[i].Burger.Id" value="@ViewBag.burgers[i].Id" />
+                <input type="hidden" asp-for="@Model.Burgers[i].Price" value="@ViewBag.burgers[i].Price">
                 <div>
                     <label asp-for="@Model.Burgers[i].IsSelected" class="form-check-label">@ViewBag.burgers[i].Name</label>
                     <input type="checkbox" asp-for="@Model.Burgers[i].IsSelected" class="form-check-input" />
@@ -40,6 +41,7 @@
         {
             <div class="form-group d-flex gap-5 align-items-center border border-secondary mb-2 px-5 py-2">
                 <input type="hidden" asp-for="@Model.Extras[i].Extra.Id" value="@ViewBag.extras[i].Id">
+                <input type="hidden" asp-for="@Model.Extras[i].Price" value="@ViewBag.extras[i].Price">
                 <div>
                     <label asp-for="@Model.Extras[i].IsSelected" class="form-check-label">@ViewBag.extras[i].Name</label>
                     <input type="checkbox" asp-for="@Model.Extras[i].IsSelected" class="form-check-input" />

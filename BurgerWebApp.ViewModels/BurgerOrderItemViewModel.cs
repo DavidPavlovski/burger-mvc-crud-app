@@ -6,7 +6,7 @@
         public BurgerViewModel Burger { get; set; }
         public OrderViewModel Order { get; set; }
         public int Quantity { get; set; }
+        public decimal Price { get; set; }
         public bool IsSelected { get; set; }
-
     }
 }

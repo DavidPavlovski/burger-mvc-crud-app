@@ -11,6 +11,7 @@ namespace BurgerWebApp.Mappers
             {
                 Burger=burger.Burger.ToViewModel(),
                 Quantity = burger.Quantity,
+                Price = burger.Price,
                 IsSelected=false,
             };
         }

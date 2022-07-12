@@ -41,8 +41,8 @@
                     <tr>
                         <td>@item.Burger.Name</td>
                         <td>@item.Quantity</td>
-                        <td>@item.Burger.Price</td>
-                        <td>@item.Quantity * @item.Burger.Price = @((item.Quantity * item.Burger.Price).ToString("C" , CultureInfo.CreateSpecificCulture("mk-MK")))</td>
+                        <td>@item.Price</td>
+                        <td>@((item.Quantity * item.Price).ToString("C" , CultureInfo.CreateSpecificCulture("mk-MK")))</td>
                     </tr>
                 }
             }
@@ -53,7 +53,7 @@
                 <th>Total Price For all items:</th>
                 <th></th>
                 <th></th>
-                <th>@(Model.Burgers.Sum( x => x.Burger.Price*x.Quantity).ToString("C" , CultureInfo.CreateSpecificCulture("mk-MK")))</th>
+                <th>@(Model.Burgers.Sum( x => x.Price*x.Quantity).ToString("C" , CultureInfo.CreateSpecificCulture("mk-MK")))</th>
             </tr>
         </tfoot>
     </table>
@@ -79,8 +79,8 @@
                     <tr>
                         <td>@item.Extra.Name</td>
                         <td>@item.Quantity</td>
-                        <td>@item.Extra.Price</td>
-                        <td>@item.Quantity * @item.Extra.Price = @((item.Quantity * item.Extra.Price).ToString("C" , CultureInfo.CreateSpecificCulture("mk-MK")))</td>
+                        <td>@item.Price</td>
+                        <td>@((item.Quantity * item.Price).ToString("C" , CultureInfo.CreateSpecificCulture("mk-MK")))</td>
                     </tr>
                 }
             }
@@ -90,7 +90,7 @@
                 <th>Total Price for all items</th>
                 <th></th>
                 <th></th>
-                <th>@(Model.Extras.Sum( x => x.Extra.Price * x.Quantity).ToString("C" , CultureInfo.CreateSpecificCulture("mk-MK")))</th>
+                <th>@(Model.Extras.Sum( x => x.Price * x.Quantity).ToString("C" , CultureInfo.CreateSpecificCulture("mk-MK")))</th>
             </tr>
         </tfoot>
     </table>

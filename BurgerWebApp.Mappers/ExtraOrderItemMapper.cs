@@ -13,7 +13,8 @@ namespace BurgerWebApp.Mappers
                 Extra = extra.Extra.ToViewModel(),
                 Quantity = extra.Quantity,
                 Price = extra.Price,
-                IsSelected = false
+                IsSelected = false,
+                OrderId = extra.OrderId
             };
         }
     }

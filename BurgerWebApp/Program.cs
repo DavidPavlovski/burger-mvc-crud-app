@@ -15,17 +15,20 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IBurgerService, BurgerService>();
 builder.Services.AddTransient<IExtraService, ExtraService>();
 builder.Services.AddTransient<IOrderService, OrderService>();
+builder.Services.AddTransient<IBurgerOrderItemService, BurgerOrderItemService>();
+builder.Services.AddTransient<IExtraOrderItemService, ExtraOrderItemService>();
 
 builder.Services.AddTransient<IRepository<Burger>, BurgerRepository>();
 builder.Services.AddTransient<IRepository<Extra>, ExtraRepository>();
 builder.Services.AddTransient<IRepository<Order>, OrderRepository>();
+builder.Services.AddTransient<IRepository<BurgerOrderItem>, BurgerOrderItemRepository>();
+builder.Services.AddTransient<IRepository<ExtraOrderItem>, ExtraOrderItemRepository>();
 
 builder.Services.AddDbContext<BurgerWebAppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
 var app = builder.Build();
-
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

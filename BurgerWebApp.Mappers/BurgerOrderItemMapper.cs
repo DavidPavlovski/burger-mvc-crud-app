@@ -9,10 +9,12 @@ namespace BurgerWebApp.Mappers
         {
             return new BurgerOrderItemViewModel()
             {
+                Id = burger.Id,
                 Burger=burger.Burger.ToViewModel(),
                 Quantity = burger.Quantity,
                 Price = burger.Price,
                 IsSelected=false,
+                OrderId=burger.OrderId,
             };
         }
     }

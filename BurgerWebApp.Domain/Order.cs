@@ -1,4 +1,6 @@
-﻿namespace BurgerWebApp.Domain
+﻿using BurgerWebApp.ViewModels;
+
+namespace BurgerWebApp.Domain
 {
     public class Order
     {
@@ -29,6 +31,13 @@
             Extras = extras;
             Burgers = burgers;
             TotalPrice = totalPrice;
+        }
+
+        public void Update(OrderViewModel model)
+        {
+            FirstName = model.FirstName;
+            LastName = model.LastName;
+            Address = model.Address;
         }
     }
 }

@@ -70,7 +70,7 @@ namespace BurgerWebApp.Services.Implementation
             {
                 throw new Exception("Burger with that name already exists");
             }
-            Burger burger = _burgerRepository.GetAll().FirstOrDefault(x => x.Id == model.Id);
+            Burger burger = _burgerRepository.GetById(model.Id);
             if (burger == null)
             {
                 throw new Exception("The endpoint does not exist");

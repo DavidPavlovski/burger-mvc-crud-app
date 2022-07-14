@@ -34,6 +34,7 @@ namespace BurgerWebApp.Controllers
         {
             ViewBag.burgers = _burgerService.GetAll();
             ViewBag.extras = _extraService.GetAll();
+            var order = new OrderViewModel();
             return View(new OrderViewModel());
         }
         [HttpPost]
@@ -43,6 +44,18 @@ namespace BurgerWebApp.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult Edit(int id)
+        {
+            var order = _orderService.GetById(id);
+            return View(order);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(OrderViewModel model)
+        {
+            _orderService.Edit(model);
+            return RedirectToAction("Index");
+        }
         public IActionResult Delete(int id)
         {
             _orderService.Delete(id);

@@ -59,7 +59,6 @@ namespace BurgerWebApp.Services.Implementation
             }
             newOrder.Burgers = burgers;
             newOrder.Extras = extras;
-            newOrder.TotalPrice = burgers.Sum(x => x.Price * x.Quantity) + extras.Sum(x => x.Price * x.Quantity);
             _orderRepository.Insert(newOrder);
         }
 
@@ -75,7 +74,7 @@ namespace BurgerWebApp.Services.Implementation
 
         public void Edit(OrderViewModel model)
         {
-            if (String.IsNullOrEmpty(model.FirstName) || string.IsNullOrEmpty(model.LastName) || string.IsNullOrEmpty(model.Address))
+            if (string.IsNullOrEmpty(model.FirstName) || string.IsNullOrEmpty(model.LastName) || string.IsNullOrEmpty(model.Address))
             {
                 throw new Exception("All text fields must be filled");
             }
@@ -84,7 +83,22 @@ namespace BurgerWebApp.Services.Implementation
             {
                 throw new Exception($"Order with id : {model.Id} does not exist");
             }
+            if (order.IsOrderCompleted)
+            {
+                throw new Exception("Order is already completed you cannot edit at this time");
+            }
             order.Update(model);
+            _orderRepository.Update(order);
+        }
+
+        public void CompleteOrder(int id)
+        {
+            var order = _orderRepository.GetById(id);
+            if(order.Burgers.Count == 0 && order.Extras.Count == 0)
+            {
+                throw new Exception("You must have at least one item in cart to proceed");
+            }
+            order.CompleteOrder();
             _orderRepository.Update(order);
         }
     }

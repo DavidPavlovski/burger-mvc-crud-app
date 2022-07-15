@@ -3,6 +3,10 @@
 
 <h1>Details for order-id : #@Model.Id</h1>
 
+@if (!Model.IsOrderCompleted)
+{
+    <a asp-action="CompleteOrder" asp-controller="Order" asp-route-id="@Model.Id" class="btn btn-warning">Complete Order</a>
+}
 <h2 class="text-center mt-4">Customer Details</h2>
 <table class="table table-striped">
     <thead>

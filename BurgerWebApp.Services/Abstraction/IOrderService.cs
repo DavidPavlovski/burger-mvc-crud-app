@@ -14,5 +14,6 @@ namespace BurgerWebApp.Services.Abstraction
         void Create(OrderViewModel model);
         void Edit(OrderViewModel model);
         void Delete(int id);
+        void CompleteOrder(int id);
     }
 }

@@ -17,7 +17,7 @@ namespace BurgerWebApp.Mappers
                 Burgers = model.Burgers.Select(x => x.ToViewModel()).ToList(),
                 Location = model.Location.ToViewModel(),
                 LocationId = model.LocationId,
-                TotalPrice = model.TotalPrice
+                IsOrderCompleted = model.IsOrderCompleted
             };
         }
         public static List<OrderViewModel> OrderViewModels(this List<Order> orders)

@@ -1,8 +1,37 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model List<BurgerViewModel>
+@{
+    ViewData["Title"] = "Dacos Burgers";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome to Dacos Burgers</h1>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div id="carouselExampleControls" class="carousel slide col-6 mx-auto" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <div class="@(i==0 ? "carousel-item active" : "carousel-item")">
+                        <img src="@Model[i].ImageUrl" alt="@Model[i].Name" style="height:400px; width:100%;">
+                        <div class="carousel-caption d-none d-md-block bg-dark">
+                            <h5>@Model[i].Name</h5>
+                            <p>@Model[i].Ingredients</p>
+                        </div>
+                    </div>
+                }
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <a asp-controller="Order" asp-action="Create" class="btn btn-lg mt-4 btn-primary col-4 d-block mx-auto">Make your order now</a>
 </div>

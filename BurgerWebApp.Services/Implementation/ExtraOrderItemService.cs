@@ -31,6 +31,10 @@ namespace BurgerWebApp.Services.Implementation
             {
                 throw new Exception($"Order with id: {model.OrderId} does not exist");
             }
+            if (order.IsOrderCompleted)
+            {
+                throw new Exception("Order is already completed you cannot edit at this time");
+            }
             var extra = _extraRepository.GetById(model.Extra.Id);
             if (extra == null)
             {
@@ -60,6 +64,10 @@ namespace BurgerWebApp.Services.Implementation
             {
                 throw new Exception($"Order with Id : {model.OrderId} does not exist.");
             }
+            if (order.IsOrderCompleted)
+            {
+                throw new Exception("Order is already completed you cannot edit at this time");
+            }
             if (model.Quantity <= 0)
             {
                 throw new Exception($"Quantity cannot be 0 or less");
@@ -85,6 +93,10 @@ namespace BurgerWebApp.Services.Implementation
             if (order == null)
             {
                 throw new Exception($"Order with id :{order.Id} does not contain item with id : {id}");
+            }
+            if (order.IsOrderCompleted)
+            {
+                throw new Exception("Order is already completed you cannot edit at this time");
             }
             var item = order.Extras.FirstOrDefault(x => x.Id == id);
             order.Extras.Remove(item);

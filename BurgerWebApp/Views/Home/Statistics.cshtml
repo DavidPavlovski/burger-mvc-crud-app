@@ -3,12 +3,27 @@
 <h1>Order Statistics</h1>
 
 <table class="table table-striped">
-   
+
     <tbody>
         <tr>
             <td>Number of Orders</td>
             <td>@Model.Count</td>
         </tr>
+        <tr>
+            <td>Completed Orders</td>
+            <td>@Model.Where(x=> x.IsOrderCompleted).Count()</td>
+        </tr>
+        <tr>
+            <td>Pending Orders</td>
+            <td>@Model.Where(x => !x.IsOrderCompleted).Count()</td>
+        </tr>
 
+        @foreach (var l in ViewBag.locations)
+        {
+            <tr>
+                <td>@l.Name orders</td>
+                <td>@Model.Where(x => x.Location.Name == l.Name).Count()</td>
+            </tr>
+        }
     </tbody>
 </table>

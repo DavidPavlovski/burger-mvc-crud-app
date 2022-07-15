@@ -64,5 +64,11 @@ namespace BurgerWebApp.Controllers
             _orderService.Delete(id);
             return RedirectToAction("Index");
         }
+
+        public IActionResult CompleteOrder(int id)
+        {
+            _orderService.CompleteOrder(id);
+            return RedirectToAction("Index");
+        }
     }
 }

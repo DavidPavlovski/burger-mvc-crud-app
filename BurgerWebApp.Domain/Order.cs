@@ -13,7 +13,7 @@ namespace BurgerWebApp.Domain
         public ICollection<BurgerOrderItem> Burgers { get; set; }
         public int LocationId { get; set; }
         public Location Location { get; set; }
-        public decimal TotalPrice { get; set; }
+        public bool IsOrderCompleted { get; set; }
         public Order() { }
         public Order(string firstName, string lastName, string address, int locationId)
         {
@@ -23,16 +23,12 @@ namespace BurgerWebApp.Domain
             Extras = new List<ExtraOrderItem>();
             Burgers = new List<BurgerOrderItem>();
             LocationId = locationId;
+            IsOrderCompleted = false;
         }
 
-        public Order(string firstName, string lastName, string address, ICollection<ExtraOrderItem> extras, ICollection<BurgerOrderItem> burgers, decimal totalPrice)
+        public void CompleteOrder()
         {
-            FirstName = firstName;
-            LastName = lastName;
-            Address = address;
-            Extras = extras;
-            Burgers = burgers;
-            TotalPrice = totalPrice;
+            IsOrderCompleted = true;
         }
 
         public void Update(OrderViewModel model)

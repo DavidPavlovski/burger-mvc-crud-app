@@ -10,12 +10,14 @@ namespace BurgerWebApp.Controllers
         private readonly IOrderService _orderService;
         private readonly IBurgerService _burgerService;
         private readonly IExtraService _extraService;
+        private readonly ILocationService _locationService;
 
-        public OrderController(IOrderService orderService, IBurgerService burgerService, IExtraService extraService)
+        public OrderController(IOrderService orderService, IBurgerService burgerService, IExtraService extraService , ILocationService locationService)
         {
             _orderService = orderService;
             _burgerService = burgerService;
             _extraService = extraService;
+            _locationService = locationService;
         }
 
         public IActionResult Index()
@@ -32,9 +34,9 @@ namespace BurgerWebApp.Controllers
 
         public IActionResult Create()
         {
+            ViewBag.locations = _locationService.GetLocationListItems();
             ViewBag.burgers = _burgerService.GetAll();
             ViewBag.extras = _extraService.GetAll();
-            var order = new OrderViewModel();
             return View(new OrderViewModel());
         }
         [HttpPost]
@@ -46,6 +48,7 @@ namespace BurgerWebApp.Controllers
 
         public IActionResult Edit(int id)
         {
+            ViewBag.locations = _locationService.GetLocationListItems();
             var order = _orderService.GetById(id);
             return View(order);
         }

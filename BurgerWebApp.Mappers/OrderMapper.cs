@@ -15,6 +15,8 @@ namespace BurgerWebApp.Mappers
                 Address = model.Address,
                 Extras = model.Extras.Select(x => x.ToViewModel()).ToList(),
                 Burgers = model.Burgers.Select(x => x.ToViewModel()).ToList(),
+                Location = model.Location.ToViewModel(),
+                LocationId = model.LocationId,
                 TotalPrice = model.TotalPrice
             };
         }

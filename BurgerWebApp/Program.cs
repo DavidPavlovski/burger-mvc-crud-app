@@ -17,12 +17,14 @@ builder.Services.AddTransient<IExtraService, ExtraService>();
 builder.Services.AddTransient<IOrderService, OrderService>();
 builder.Services.AddTransient<IBurgerOrderItemService, BurgerOrderItemService>();
 builder.Services.AddTransient<IExtraOrderItemService, ExtraOrderItemService>();
+builder.Services.AddTransient<ILocationService, LocationService>();
 
 builder.Services.AddTransient<IRepository<Burger>, BurgerRepository>();
 builder.Services.AddTransient<IRepository<Extra>, ExtraRepository>();
 builder.Services.AddTransient<IRepository<Order>, OrderRepository>();
 builder.Services.AddTransient<IRepository<BurgerOrderItem>, BurgerOrderItemRepository>();
 builder.Services.AddTransient<IRepository<ExtraOrderItem>, ExtraOrderItemRepository>();
+builder.Services.AddTransient<IRepository<Location>, LocationRepository>();
 
 builder.Services.AddDbContext<BurgerWebAppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))

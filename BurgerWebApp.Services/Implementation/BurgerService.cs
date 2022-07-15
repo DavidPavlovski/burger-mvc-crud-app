@@ -50,16 +50,6 @@ namespace BurgerWebApp.Services.Implementation
             return newBurger.Id;
         }
 
-        public void Delete(int id)
-        {
-            Burger burgerToDelete = _burgerRepository.GetAll().FirstOrDefault(x => x.Id == id);
-            if (burgerToDelete == null)
-            {
-                throw new Exception("Cannot perform that action");
-            }
-            _burgerRepository.DeleteById(id);
-        }
-
         public void Edit(BurgerViewModel model)
         {
             if (string.IsNullOrEmpty(model.Name) || string.IsNullOrEmpty(model.Ingredients) || string.IsNullOrEmpty(model.ImageUrl) || model.Price <= 0)
@@ -77,6 +67,17 @@ namespace BurgerWebApp.Services.Implementation
             }
             burger.Update(model);
             _burgerRepository.Update(burger);
+        }
+
+
+        public void Delete(int id)
+        {
+            Burger burgerToDelete = _burgerRepository.GetAll().FirstOrDefault(x => x.Id == id);
+            if (burgerToDelete == null)
+            {
+                throw new Exception("Cannot perform that action");
+            }
+            _burgerRepository.DeleteById(id);
         }
     }
 }

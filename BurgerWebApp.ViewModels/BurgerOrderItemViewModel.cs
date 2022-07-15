@@ -4,7 +4,6 @@
     {
         public int Id { get; set; }
         public BurgerViewModel Burger { get; set; }
-
         public int OrderId { get; set; }
         public OrderViewModel Order { get; set; }
         public int Quantity { get; set; }

@@ -9,6 +9,7 @@
         <tr>
             <th scope="col">Custommer Name</th>
             <th scope="col">Custommer Address</th>
+            <th scope="col">Order Location</th>
             <th scope="col">Total Order price</th>
         </tr>
     </thead>
@@ -16,6 +17,7 @@
         <tr>
             <td>@Model.FirstName</td>
             <td>@Model.LastName</td>
+            <td>@Model.Location.Name</td>
             <td>@Model.TotalPrice.ToString("C" , CultureInfo.CreateSpecificCulture("mk-MK"))</td>
         </tr>
     </tbody>

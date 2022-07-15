@@ -241,6 +241,67 @@ namespace BurgerWebApp.DataAccess.Migrations
                     b.ToTable("ExtraOrderItem", (string)null);
                 });
 
+            modelBuilder.Entity("BurgerWebApp.Domain.Location", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ClosesAt")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("OpensAt")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Location", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "Partizanski orderdi",
+                            ClosesAt = 22,
+                            Name = "Dacos burgers Skopje Centar",
+                            OpensAt = 8
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "Jane Sandanski",
+                            ClosesAt = 22,
+                            Name = "Dacos burgers Skopje Aerodrom",
+                            OpensAt = 8
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Address = "7mi Noemvri",
+                            ClosesAt = 22,
+                            Name = "Dacos burgers Ohrid",
+                            OpensAt = 8
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Address = "Ilindenska",
+                            ClosesAt = 22,
+                            Name = "Dacos burgers Bitola",
+                            OpensAt = 8
+                        });
+                });
+
             modelBuilder.Entity("BurgerWebApp.Domain.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -261,10 +322,15 @@ namespace BurgerWebApp.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("LocationId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LocationId");
 
                     b.ToTable("Order", (string)null);
                 });
@@ -305,6 +371,17 @@ namespace BurgerWebApp.DataAccess.Migrations
                     b.Navigation("Extra");
 
                     b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("BurgerWebApp.Domain.Order", b =>
+                {
+                    b.HasOne("BurgerWebApp.Domain.Location", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Location");
                 });
 
             modelBuilder.Entity("BurgerWebApp.Domain.Order", b =>

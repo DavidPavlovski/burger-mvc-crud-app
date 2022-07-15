@@ -45,12 +45,7 @@ namespace BurgerWebApp.Services.Implementation
             {
                 throw new Exception("Cannot make an order without items");
             }
-            Order newOrder = new Order
-            {
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                Address = model.Address,
-            };
+            Order newOrder = new Order(model.FirstName, model.LastName, model.Address, model.LocationId);
 
             List<BurgerOrderItem> burgers = new List<BurgerOrderItem>();
             List<ExtraOrderItem> extras = new List<ExtraOrderItem>();

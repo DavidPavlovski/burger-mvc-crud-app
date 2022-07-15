@@ -16,11 +16,11 @@ namespace BurgerWebApp.DataAccess.Repositories
 
         public List<Order> GetAll()
         {
-            return _dbContext.Orders.Include(x=> x.Burgers).ThenInclude(y => y.Burger).Include(x => x.Extras).ThenInclude(y=> y.Extra).ToList();
+            return _dbContext.Orders.Include(x => x.Location).Include(x=> x.Burgers).ThenInclude(y => y.Burger).Include(x => x.Extras).ThenInclude(y=> y.Extra).ToList();
         }
         public Order GetById(int id)
         {
-            return _dbContext.Orders.Include(x => x.Burgers).ThenInclude(y => y.Burger).Include(x => x.Extras).ThenInclude(y => y.Extra).FirstOrDefault(x => x.Id == id);
+            return _dbContext.Orders.Include(x => x.Location).Include(x => x.Burgers).ThenInclude(y => y.Burger).Include(x => x.Extras).ThenInclude(y => y.Extra).FirstOrDefault(x => x.Id == id);
         }
         public void Insert(Order entity)
         {

@@ -8,6 +8,7 @@ namespace BurgerWebApp.DataAccess
         public DbSet<Burger> Burgers { get; set; }
         public DbSet<Extra> Extras { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<Location> Locations { get; set; }
         public DbSet<BurgerOrderItem> BurgerOrderItems { get; set; }
         public DbSet<ExtraOrderItem> ExtraOrderItems { get; set; }
         public BurgerWebAppDbContext(DbContextOptions<BurgerWebAppDbContext> options) : base(options)
@@ -19,6 +20,7 @@ namespace BurgerWebApp.DataAccess
             builder.Entity<Burger>(x => x.ToTable("Burger"));
             builder.Entity<Extra>(x => x.ToTable("Extra"));
             builder.Entity<Order>(x => x.ToTable("Order"));
+            builder.Entity<Location>(x => x.ToTable("Location"));
             builder.Entity<BurgerOrderItem>(x => x.ToTable("BurgerOrderItem"));
             builder.Entity<ExtraOrderItem>(x => x.ToTable("ExtraOrderItem"));
 
@@ -41,6 +43,13 @@ namespace BurgerWebApp.DataAccess
                 new Extra("Small waffle fries", 50) { Id = 3 },
                 new Extra("Large waffle fries", 80) { Id = 4 }
             );
+            builder.Entity<Location>().HasData
+            (
+                new Location("Dacos burgers Skopje Centar", "Partizanski orderdi", 8, 22) { Id = 1 },
+                new Location("Dacos burgers Skopje Aerodrom", "Jane Sandanski", 8, 22) { Id = 2 },
+                new Location("Dacos burgers Ohrid", "7mi Noemvri", 8, 22) { Id = 3 },
+                new Location("Dacos burgers Bitola", "Ilindenska", 8, 22) { Id = 4 }
+           );
         }
     }
 }
